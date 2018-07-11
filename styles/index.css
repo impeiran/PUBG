@@ -6,6 +6,7 @@ body{
   position: relative;
   overflow: hidden;
   font-family: Arial,'Microsoft Yahei';
+  background-color: #000;
 }
 /*.ad-wrapper{
   position: relative;
