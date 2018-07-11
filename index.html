@@ -38,21 +38,29 @@
     </header>
     <div class="container" id="box-wrap">
         <div class="vd-box first-section">
-            <video src="video/demo.mp4" autoplay loop></video>
+            <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_5dad5415ceb249339a0bf9662bfd414e.f0.mp4?vkey=E1EBDC705EBE77336137AB2CFEB4FC528FCB73D56454691F3953AFFFEA7344018608125762AEE8D78325270065C9A70354592FEC15CA076BEE5749B9062D5D5FC4D5BD418F69585F6772B006A6B236D43DAE7C589A32DB86&sha=0" autoplay loop></video>
             <img src="img/logo_b.png" alt="">
             <div class="video-btn"></div>
         </div>
         <div class="vd-box" id="section1">
-            <video src="video/demo1.mp4" preload loop></video>
+            <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_e48ffd8a30074766bfae4ba50cbbbce5.f0.mp4?vkey=D30F17B405BB419A31A13E9C3E4AA121EC920662299A8715F83A855FC502C1DA9585BFF529C4F08E1A53DCFBE4E76E8676A8A59614E4E3B63B2E4973812B7455BD2C12B88F0B536C17A10C275F5393D30DF2A23F96D7A800&sha=0" preload loop></video>
+            <div class="headline-box">
+              <h1></h1>
+              <h2>连呼吸都必须小心翼翼，前所未有的紧张刺激体验</h2>              
+            </div>
         </div>
         <div class="vd-box" id="section2">
-            <video src="video/demo3.mp4" preload loop></video>
+            <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_18cc6cba2ebb4635aa06d2020134d1be.f0.mp4?vkey=7DD360CCE99797935A99F8EBBC2AA293D2B050FCD1B9B0C677D4B0CA7174101758956F121CF920A5D806B74861144A631384D7341BADA13F0F55AAE0944C681AB836ED23B146428844335C9D35F9CC9F1E0E7851315DA75F&sha=0" preload loop></video>
+            <div class="headline-box">
+              <h1></h1>
+              <h2>真实的射击体验，多种枪械与配件，眼观六路耳听八方</h2>              
+            </div>
         </div>
         <div class="vd-box" id="section3">
-            <video src="video/demo3.mp4" preload loop></video>
+            <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_18cc6cba2ebb4635aa06d2020134d1be.f0.mp4?vkey=7DD360CCE99797935A99F8EBBC2AA293D2B050FCD1B9B0C677D4B0CA7174101758956F121CF920A5D806B74861144A631384D7341BADA13F0F55AAE0944C681AB836ED23B146428844335C9D35F9CC9F1E0E7851315DA75F&sha=0" preload loop></video>
         </div>
         <div class="vd-box" id="section4">
-            <video src="video/demo4.mp4" preload loop></video>
+            <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_e69987bb8934400eb786a159f45985ce.f0.mp4?vkey=28B37D6BB89BA365B36B7576BA4831411BFC018D2A56679F23FDD3C6754024FA3D5861C60C9E8E43CC278B56987D8DB12E276EB94E4AD88B31FD0EAB40FCDF0CC61878D4C989326CD1840AC50E43C4CD8958D3F589CE90B0&sha=0" preload loop></video>
         </div>
         <div class="vd-box" id="section5">
             <img src="img/bg_section5.jpg" alt="">
@@ -71,10 +79,17 @@
       
     </div>
     <script>
+
+    // 页面索引
     let index = 0;
+
+    // 定时器声明
     let timer = null;
+
+    // 页面数量
     let pages = $('.vd-box').length;
 
+    // 页面下滑
     function goDown(e) {
         if (!$('#box-wrap').is(':animated')) {
             if (index == 0) {
@@ -93,6 +108,7 @@
         }
     }
 
+    // 页面上滑
     function goUp(e) {
         if (!$('#box-wrap').is(':animated')) {
             if (index == 1) {
@@ -109,9 +125,12 @@
         }
     }
 
+    // 获取索引对应高度
     function getHeight() {
         return -($('.vd-box').height()) * index;
     }
+
+    // 绑定键盘方向键事件
     $(document).keydown((e) => {
         if (e.keyCode == 40 && index < pages - 1) {
             goDown();
@@ -120,17 +139,19 @@
         }
     });
 
+    // VIDEO暂停
     function videoPause(vd_num) {
       let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
       return target ? target.pause() : null;
     }
 
+    // VIDEO播放
     function videoPlay(vd_num) {
       let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
       return target ? target.play() : null;
     }
 
-
+    // 侧栏切换显示
     function toggleSideBar() {
         let sidebar = $('.sidebar');
         if (sidebar.css('display') === 'none') {
@@ -142,11 +163,13 @@
         }
     }
 
+    // 对应索引高亮
     function activeSideBar() {
         $('.sidebar li').removeClass('nav-active');
         $('.sidebar li:eq(' + index + ')').addClass('nav-active');
     }
 
+    // 跳转移动
     function moveTo(target) {
         videoPause(index);
         index = target;
@@ -157,6 +180,7 @@
         activeSideBar();
     }
 
+    // 绑定滚轮事件
     $(window).on('mousewheel DOMMouseScroll', (e) => {
         e.preventDefault();
         e = e.originalEvent;
@@ -171,6 +195,7 @@
         }, 100);
     });
 
+    // 侧栏事件委托点击事件
     $('.sidebar').click( (e)=>{
         if ($(e.target).is('li')) {
             let target = $(e.target).index();
@@ -178,11 +203,13 @@
         }
     });
 
+    // 侧栏点击向上事件
     $('.page-up').click( (e)=>{
         index > 0 ? goUp() : null;
         e.stopPropagation();
     });
 
+    // 侧栏点击向下事件
     $('.page-down').click( (e)=>{
         index < pages - 1 ? goDown() : null;
         e.stopPropagation();
