@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PUBG</title>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="scripts/jquery.js"></script>
+</head>
+
+<body>
+    <!--   <div class="ad-wrapper">  
+    <div class="ad">
+      <a class="tencent-logo" href="">
+      </a>
+      <ul>
+        <li><a href="">成长守护平台</a></li>
+        <li><a href="">腾讯游戏排行榜</a></li>
+      </ul>  
+    </div>
+  </div> -->
+    <header>
+        <div class="header-wrapper">
+            <div class="logo"></div>
+            <ul class="header-nav">
+                <li><a href="">官网首页</a></li>
+                <li><a href="">绑定查询</a></li>
+                <li class="nav-active"><a href="">国服预约</a></li>
+                <li class="nav-active"><a href="">老兵绑定</a></li>
+                <li><a href="">社区APP</a></li>
+                <li><a href="">网吧认证</a></li>
+            </ul>
+            <div class="btn-enter">
+                进入官网
+            </div>
+        </div>
+    </header>
+    <div class="container" id="box-wrap">
+        <div class="vd-box first-section">
+            <video src="video/demo.mp4" autoplay loop></video>
+            <img src="img/logo_b.png" alt="">
+            <div class="video-btn"></div>
+        </div>
+        <div class="vd-box" id="section1">
+            <video src="video/demo1.mp4" preload loop></video>
+        </div>
+        <div class="vd-box" id="section2">
+            <video src="video/demo3.mp4" preload loop></video>
+        </div>
+        <div class="vd-box" id="section3">
+            <video src="video/demo3.mp4" preload loop></video>
+        </div>
+        <div class="vd-box" id="section4">
+            <video src="video/demo4.mp4" preload loop></video>
+        </div>
+        <div class="vd-box" id="section5">
+            <img src="img/bg_section5.jpg" alt="">
+        </div>
+    </div>
+    <ul class="sidebar">
+        <li class="page-up btn"></li>
+        <li>N</li>
+        <li>NE</li>
+        <li>E</li>
+        <li>SE</li>
+        <li>S</li>
+        <li class="page-down btn"></li>
+    </ul>
+    <div class="mouse">
+      
+    </div>
+    <script>
+    let index = 0;
+    let timer = null;
+    let pages = $('.vd-box').length;
+
+    function goDown(e) {
+        if (!$('#box-wrap').is(':animated')) {
+            if (index == 0) {
+                index++;
+                toggleSideBar();
+            } else {
+                videoPause(index++);
+            }
+            $('#box-wrap').animate({
+                top: getHeight()
+            }, 600, 'swing');
+            setTimeout((e) => {
+                videoPlay(index);
+            }, 630);
+            activeSideBar();
+        }
+    }
+
+    function goUp(e) {
+        if (!$('#box-wrap').is(':animated')) {
+            if (index == 1) {
+                toggleSideBar();
+            }
+            videoPause(index--);
+            $('#box-wrap').animate({
+                top: getHeight()
+            }, 600, 'swing');
+            setTimeout((e) => {
+                videoPlay(index);
+            }, 630);
+            activeSideBar();
+        }
+    }
+
+    function getHeight() {
+        return -($('.vd-box').height()) * index;
+    }
+    $(document).keydown((e) => {
+        if (e.keyCode == 40 && index < pages - 1) {
+            goDown();
+        } else if (e.keyCode == 38 && index > 0) {
+            goUp();
+        }
+    });
+
+    function videoPause(vd_num) {
+      let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
+      return target ? target.pause() : null;
+    }
+
+    function videoPlay(vd_num) {
+      let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
+      return target ? target.play() : null;
+    }
+
+
+    function toggleSideBar() {
+        let sidebar = $('.sidebar');
+        if (sidebar.css('display') === 'none') {
+            setTimeout(() => {
+                sidebar.show();
+            }, 630);
+        } else {
+            sidebar.hide();
+        }
+    }
+
+    function activeSideBar() {
+        $('.sidebar li').removeClass('nav-active');
+        $('.sidebar li:eq(' + index + ')').addClass('nav-active');
+    }
+
+    function moveTo(target) {
+        videoPause(index);
+        index = target;
+        $('#box-wrap').animate({
+            top: getHeight()
+        }, 600, 'swing');
+        videoPlay(index);
+        activeSideBar();
+    }
+
+    $(window).on('mousewheel DOMMouseScroll', (e) => {
+        e.preventDefault();
+        e = e.originalEvent;
+        timer ? clearTimeout(timer) : null;
+        timer = setTimeout(() => {
+          let delta = e.wheelDelta / 120 || -e.detail / 3;
+          if (delta < 0 && index < pages - 1) {
+              goDown();
+          } else if (delta > 0 && index > 0) {
+              goUp();
+          }
+        }, 100);
+    });
+
+    $('.sidebar').click( (e)=>{
+        if ($(e.target).is('li')) {
+            let target = $(e.target).index();
+            moveTo(target);
+        }
+    });
+
+    $('.page-up').click( (e)=>{
+        index > 0 ? goUp() : null;
+        e.stopPropagation();
+    });
+
+    $('.page-down').click( (e)=>{
+        index < pages - 1 ? goDown() : null;
+        e.stopPropagation();
+    });
+    </script>
+</body>
+
+</html>
