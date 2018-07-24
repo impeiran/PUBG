@@ -28,8 +28,8 @@
                 <li><a href="">绑定查询</a></li>
                 <li class="nav-active"><a href="">国服预约</a></li>
                 <li class="nav-active"><a href="">老兵绑定</a></li>
+                <li><a href="">游戏特色 </a></li>
                 <li><a href="">社区APP</a></li>
-                <li><a href="">网吧认证</a></li>
             </ul>
             <div class="btn-enter">
                 进入官网
@@ -75,6 +75,12 @@
               <h2>时刻变化的随机因素，制定最优策略</h2>      
             </div>
         </div>
+        <footer>
+            <div class="copyright">
+                <span class="foot-img1"></span>
+                <span class="foot-img2"></span>
+            </div>
+        </footer>
     </div>
     <div class="sidebar-box">
         <ul class="sidebar">
@@ -118,9 +124,10 @@
         </ul>
     </div>
 
-    <div class="mouse">
-      
-    </div>
+    <div class="mouse"></div>
+
+
+
     <script>
 
     // 页面索引
@@ -129,9 +136,11 @@
     // 定时器声明
     let timer = null;
 
-    // 页面数量
-    let pages = $('.vd-box').length;
+    // 页面数量 && footer 高度
+    let pages = $('.vd-box').length,
+        footHeight = $('footer').height();
 
+        console.log(footHeight)
     // 页面下滑
     function goDown(e) {
         if (!$('#box-wrap').is(':animated')) {
@@ -170,12 +179,12 @@
 
     // 获取索引对应高度
     function getHeight() {
-        return -($('.vd-box').height()) * index;
+        return index == pages ? -($('.vd-box').height()) * ( index -1 )  - footHeight : -($('.vd-box').height()) * index;
     }
 
     // 绑定键盘方向键事件
     $(document).keydown((e) => {
-        if (e.keyCode == 40 && index < pages - 1) {
+        if (e.keyCode == 40 && index < pages ) {
             goDown();
         } else if (e.keyCode == 38 && index > 0) {
             goUp();
@@ -185,12 +194,14 @@
     // VIDEO暂停
     function videoPause(vd_num) {
       let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
+      console.log(target)
       target && target.pause();
     }
 
     // VIDEO播放
     function videoPlay(vd_num) {
       let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
+      console.log(target)
       target && target.play();
     }
 
@@ -208,11 +219,13 @@
 
     // 对应索引高亮
     function activeSideBar() {
+        let $mouse = $('.mouse');
         $('.sidebar li b').removeClass('nav-active');
         $('.sidebar li').children('span,.nav-card').css('visibility','hidden');
         let $currentLi = $('.sidebar li:eq(' + index + ')');
         $currentLi.children('b').addClass('nav-active');
         $currentLi.children('span,.nav-card').css('visibility','visible');
+        index == pages ? $mouse.hide() : $mouse.show();  
     }
 
     // 跳转移动
@@ -233,7 +246,7 @@
         timer ? clearTimeout(timer) : null;
         timer = setTimeout(() => {
           let delta = e.wheelDelta / 120 || -e.detail / 3;
-          if (delta < 0 && index < pages - 1) {
+          if (delta < 0 && index < pages ) {
               goDown();
           } else if (delta > 0 && index > 0) {
               goUp();
@@ -245,13 +258,13 @@
     $('.sidebar').on('click','li', (e)=>{
         let $obj = $(e.target),
             $li = $obj.is('li') ? $obj : $obj.parents('li');
-        if( $li.is('.page-up') && index > 0 ){
+        if( $obj.hasClass('page-up') && index > 0 ){
             goUp();
         }
-        else if( $li.is('.page-down') && index < pages -1 ){
+        else if( $obj.hasClass('page-down') && index < pages  ){
             goDown();
         }
-        else{
+        else if( index <= pages - 1 && index > 0 ){
             moveTo($li.index());
         }
     });

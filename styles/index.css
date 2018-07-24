@@ -7,6 +7,9 @@ body{
   overflow: hidden;
   font-family: Arial,'Microsoft Yahei';
   background-color: #000;
+  -webkit-transition: all ease;
+  -o-transition: all ease;
+  -moz-transition: all ease;
   transition: all ease;
 }
 /*.ad-wrapper{
@@ -64,7 +67,7 @@ header .header-wrapper{
 header .logo{
   display: inline-block;
   width: 140px;
-  height: 100%;
+  height: 96%;
   overflow: hidden;
   background: url(../img/logo.png) no-repeat;
   background-position: 0 0;
@@ -81,7 +84,7 @@ header .header-nav li{
   font-size: 14px;
 }
 header .header-nav li a{
-  color: #fff;
+  color: #ccc;
 }
 header .header-nav li a:hover{
   color: #E69800;  
@@ -96,7 +99,10 @@ header .btn-enter{
   line-height: 40px;
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+     -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   text-align: center;
   background-color: #E69800;
   float: right;
@@ -121,7 +127,8 @@ header .btn-enter{
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  -o-object-fit: fill;
+     object-fit: fill;
   z-index: -1;
 }
 .first-section img{
@@ -130,7 +137,10 @@ header .btn-enter{
   position: absolute;
   top: 65%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+     -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
 }
 .first-section .video-btn{
   width: 82px;
@@ -138,7 +148,10 @@ header .btn-enter{
   position: absolute;
   top: 40%;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   background: url(../img/sprite.png) no-repeat;
   background-position: 0px 0px ;
   cursor: pointer;
@@ -149,7 +162,10 @@ header .btn-enter{
   position: absolute;
   top: 58%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+     -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
   text-align: center;
 }
 #section1 h1{
@@ -174,7 +190,10 @@ header .btn-enter{
   position: absolute;
   top: 58%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+     -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
   text-align: center;
 }
 #section2 h1{
@@ -199,7 +218,10 @@ header .btn-enter{
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+     -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
 }
 #section4 .headline-box h1:first-child{
   display: block;
@@ -239,7 +261,10 @@ header .btn-enter{
   position: absolute;
   top: 14%;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   text-align: center;
 }
 #section5 h1{
@@ -264,7 +289,10 @@ header .btn-enter{
   position: absolute;
   top: 50%;
   left: 40px;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+     -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   padding-bottom: 40%;
   z-index: 1000;
 }
@@ -273,8 +301,8 @@ header .btn-enter{
   height: 100%;
   width: 100%;
   background: url(../img/bg_nav.png) no-repeat;
-  -webkit-background-size: 100% 100%;
-  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+       background-size: 100% 100%;
 }
 .sidebar li{
   width: 240px;
@@ -306,7 +334,8 @@ header .btn-enter{
   width: 30px;
   height: 30px;
   font-weight: bolder;
-  border-radius: 50%;
+  -moz-border-radius: 50%;
+       border-radius: 50%;
 }
 .sidebar li:nth-child(2){
   top: 5.5%;
@@ -344,7 +373,8 @@ header .btn-enter{
   left: 0;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  -moz-border-radius: 50%;
+       border-radius: 50%;
 }
 
 .sidebar .nav-active{
@@ -358,10 +388,15 @@ header .btn-enter{
   width: 168px;
   height: 60px;
   vertical-align: top;
-  transform: translateY(-25%);
+  -webkit-transform: translateY(-25%);
+     -moz-transform: translateY(-25%);
+      -ms-transform: translateY(-25%);
+          transform: translateY(-25%);
   font-size: 14px;
   color: #fff;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
   background-image: url(../img/sprite.png);
   background-repeat: no-repeat;
   visibility: hidden;
@@ -373,8 +408,56 @@ header .btn-enter{
   position: fixed;
   left: 50%;
   bottom: 5px;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   background: url(../img/sprite.png) no-repeat;
   background-position: -82px 0px ;
   z-index: 50;
+}
+
+footer{
+  width: 100%;
+  height: 160px;
+  background: #000;
+}
+footer .copyright{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 3em;
+  text-align: center;
+  color: #fff;
+}
+footer .foot-img1{
+  display: inline-block;
+  float: left;
+  width: 168px;
+  height: 34px;
+  vertical-align: middle;
+  background-image: url(../img/logo.png);
+  background-repeat: no-repeat;
+  background-position: 0 -66px;
+}
+footer .foot-img2{
+  display: inline-block;
+  width: 136px;
+  height: 86px;
+  font-size: 16px;
+  color: #fff;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  background-image: url(../img/nav_spr.png);
+  background-repeat: no-repeat;
+  background-position: -586px -154px;
 }
