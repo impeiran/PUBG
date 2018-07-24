@@ -46,14 +46,15 @@
             <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_e48ffd8a30074766bfae4ba50cbbbce5.f0.mp4?vkey=D30F17B405BB419A31A13E9C3E4AA121EC920662299A8715F83A855FC502C1DA9585BFF529C4F08E1A53DCFBE4E76E8676A8A59614E4E3B63B2E4973812B7455BD2C12B88F0B536C17A10C275F5393D30DF2A23F96D7A800&sha=0" preload loop></video>
             <div class="headline-box">
               <h1></h1>
-              <h2>连呼吸都必须小心翼翼，前所未有的紧张刺激体验</h2>              
+              <h2>连呼吸都必须小心翼翼，前所未有的紧张刺激体验</h2>      
             </div>
         </div>
         <div class="vd-box" id="section2">
             <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_18cc6cba2ebb4635aa06d2020134d1be.f0.mp4?vkey=7DD360CCE99797935A99F8EBBC2AA293D2B050FCD1B9B0C677D4B0CA7174101758956F121CF920A5D806B74861144A631384D7341BADA13F0F55AAE0944C681AB836ED23B146428844335C9D35F9CC9F1E0E7851315DA75F&sha=0" preload loop></video>
             <div class="headline-box">
               <h1></h1>
-              <h2>真实的射击体验，多种枪械与配件，眼观六路耳听八方</h2>              
+              <h2>真实的射击体验，多种枪械与配件，眼观六路耳听八方</h2>     
+
             </div>
         </div>
         <div class="vd-box" id="section3">
@@ -61,20 +62,62 @@
         </div>
         <div class="vd-box" id="section4">
             <video src="http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_e69987bb8934400eb786a159f45985ce.f0.mp4?vkey=28B37D6BB89BA365B36B7576BA4831411BFC018D2A56679F23FDD3C6754024FA3D5861C60C9E8E43CC278B56987D8DB12E276EB94E4AD88B31FD0EAB40FCDF0CC61878D4C989326CD1840AC50E43C4CD8958D3F589CE90B0&sha=0" preload loop></video>
+            <div class="headline-box">
+              <h1></h1>
+              <h1></h1>
+              <h2>丰富载具，团队合作，好友开黑</h2>      
+            </div>
         </div>
         <div class="vd-box" id="section5">
             <img src="img/bg_section5.jpg" alt="">
+            <div class="headline-box">
+              <h1></h1>
+              <h2>时刻变化的随机因素，制定最优策略</h2>      
+            </div>
         </div>
     </div>
-    <ul class="sidebar">
-        <li class="page-up btn"></li>
-        <li>N</li>
-        <li>NE</li>
-        <li>E</li>
-        <li>SE</li>
-        <li>S</li>
-        <li class="page-down btn"></li>
-    </ul>
+    <div class="sidebar-box">
+        <ul class="sidebar">
+            <li class="page-up btn"></li>
+            <li>
+                <b>N</b>
+                <span></span>
+                <div class="nav-card">
+                    丰富防具
+                </div>
+            </li>
+            <li>
+                <b>NE</b>
+                <span></span>
+                <div class="nav-card">
+                    丰富武器及配件
+                </div>
+            </li>
+            <li>
+                <b>E</b>
+                <span></span>
+                <div class="nav-card">
+                    丰富天气和地形
+                </div>
+            </li>
+            <li>
+                <b>SE</b>
+                <span></span>
+                <div class="nav-card">
+                    丰富载具
+                </div>
+            </li>
+            <li>
+                <b>S</b>
+                <span></span>
+                <div class="nav-card">
+                    地图&策略
+                </div>
+            </li>
+            <li class="page-down btn"></li>
+        </ul>
+    </div>
+
     <div class="mouse">
       
     </div>
@@ -142,18 +185,18 @@
     // VIDEO暂停
     function videoPause(vd_num) {
       let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
-      return target ? target.pause() : null;
+      target && target.pause();
     }
 
     // VIDEO播放
     function videoPlay(vd_num) {
       let target = $('.vd-box:eq(' + vd_num + ')').children('video')[0];
-      return target ? target.play() : null;
+      target && target.play();
     }
 
     // 侧栏切换显示
     function toggleSideBar() {
-        let sidebar = $('.sidebar');
+        let sidebar = $('.sidebar-box');
         if (sidebar.css('display') === 'none') {
             setTimeout(() => {
                 sidebar.show();
@@ -165,8 +208,11 @@
 
     // 对应索引高亮
     function activeSideBar() {
-        $('.sidebar li').removeClass('nav-active');
-        $('.sidebar li:eq(' + index + ')').addClass('nav-active');
+        $('.sidebar li b').removeClass('nav-active');
+        $('.sidebar li').children('span,.nav-card').css('visibility','hidden');
+        let $currentLi = $('.sidebar li:eq(' + index + ')');
+        $currentLi.children('b').addClass('nav-active');
+        $currentLi.children('span,.nav-card').css('visibility','visible');
     }
 
     // 跳转移动
@@ -196,24 +242,40 @@
     });
 
     // 侧栏事件委托点击事件
-    $('.sidebar').click( (e)=>{
-        if ($(e.target).is('li')) {
-            let target = $(e.target).index();
-            moveTo(target);
+    $('.sidebar').on('click','li', (e)=>{
+        let $obj = $(e.target),
+            $li = $obj.is('li') ? $obj : $obj.parents('li');
+        if( $li.is('.page-up') && index > 0 ){
+            goUp();
+        }
+        else if( $li.is('.page-down') && index < pages -1 ){
+            goDown();
+        }
+        else{
+            moveTo($li.index());
         }
     });
 
-    // 侧栏点击向上事件
-    $('.page-up').click( (e)=>{
-        index > 0 ? goUp() : null;
-        e.stopPropagation();
-    });
+    $('.sidebar li').hover(
+        function(){
+            if (index == $(this).index()){
+                return ;
+            } 
+            $(this).children('b').addClass('nav-active');
+            $(this).children('span,.nav-card').css('visibility','visible');
+        }, function(){
+            if (index == $(this).index()){
+                return ;
+            } 
+            $(this).children('b').removeClass('nav-active');
+            $(this).children('span,.nav-card').css('visibility','hidden');
+        }
+    )
 
-    // 侧栏点击向下事件
-    $('.page-down').click( (e)=>{
-        index < pages - 1 ? goDown() : null;
-        e.stopPropagation();
-    });
+    // 测试窗口大小适应
+    $(window).resize(()=>{
+        console.log('当前窗口宽高： ',$(window).width(), $(window).height())
+    })
     </script>
 </body>
 
